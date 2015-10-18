@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stock Data Explorer using R shiny</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Stock Data Explorer using R shiny">
+  <meta name="author" content="Victor Li">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Stock Data Explorer using R shiny</h1>
+    <h2>Project for Developing Data Products</h2>
+    <p>Victor Li<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Overview</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Using shiny to build interactive web app</li>
+<li>Using <a href="http://www.quantmod.com/">quantmod</a> to query stock data</li>
+<li>Shiny app is uploaded to <a href="https://lilinvictor.shinyapps.io/StockAnalysis">https://lilinvictor.shinyapps.io/StockAnalysis</a></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Usage</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Select stock code and time window in left panel:</p>
+
+<ul>
+<li>Select the stock from the drop list;</li>
+<li>Choose the time window as start/end date of stock price.</li>
+</ul></li>
+<li><p>Results are shown interactively in right panel:</p>
+
+<ul>
+<li>In the tab &quot;Stock price data&quot;:
+
+<ul>
+<li>Max and Min price during the time window are shown respectively;</li>
+<li>Raw data for every day price in the time window</li>
+</ul></li>
+<li>In the tab &quot;stock price chart&quot;:
+
+<ul>
+<li>Price trend chart is shown for the specified time window.</li>
+</ul></li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>UI Layout</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>UI Layout is defined in ui.R
+
+<ul>
+<li>Using navbarPage to define multiple pages:
+
+<ul>
+<li>Stock data explorer: interactive app to explore store price</li>
+<li>About: document for using this app</li>
+</ul></li>
+<li>Using tabsetPanel to define two tabs:
+
+<ul>
+<li>Stock data table</li>
+<li>Stock price chart</li>
+</ul></li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Server logic</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Business logic is defined in server.R
+
+<ul>
+<li>Using reactive() to capture user input and share logic</li>
+</ul></li>
+<li>Chart is rendered using renderPlot()</li>
+</ul>
+
+<pre><code class="r">    output$stockPlot &lt;- renderPlot({
+        plotStock(stockData())
+    })    
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-2-1.png" alt="plot of chunk unnamed-chunk-2"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Overview'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Usage'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='UI Layout'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Server logic'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
